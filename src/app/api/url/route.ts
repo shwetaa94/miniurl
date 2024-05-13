@@ -11,6 +11,9 @@ export async function POST(req: NextRequest) {
     if (!url) {
       return Response.json({ error: "URL is required" });
     }
+    const prevURL =await db.uRL.findFirst({where:{redirectedURL: url}});
+    if(prevURL)return NextResponse.json({ message: "URL ALREADY EXISTS😁",data:prevURL });
+
     const shortid = nanoid(8);
     const data = await db.uRL.create({
       data: {

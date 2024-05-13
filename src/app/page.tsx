@@ -20,8 +20,8 @@ export default function Home() {
       if (response.data) {
         const shortID = response.data.data.shortId;
         setminiurl(`http://localhost:3000/api/url?id=${shortID}`);
+        toast.success(response.data.message);
       }
-      toast.success("url generated successfully");
       console.log("Response:", response.data);
     } catch (error) {
       toast.error("error while sending url");
